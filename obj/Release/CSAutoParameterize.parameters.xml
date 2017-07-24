@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-VisualTraining-20170531022002.mdf;Initial Catalog=aspnet-VisualTraining-20170531022002;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Projects\\VisualTraining\\VisualTraining\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="VisualTrainingModel-Web.config Connection String" description="VisualTrainingModel Connection String used in web.config by the application to access the database." defaultValue="data source=tomtran.database.windows.net,1433;initial catalog=VisionTherapy;persist security info=True;user id=tomtran;password=Tungtrum90!;MultipleActiveResultSets=True;App=EntityFramework" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Projects\\VisualTraining\\VisualTraining\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='VisualTrainingModel']/@connectionString" />
+  </parameter>
+</parameters>
