@@ -2,8 +2,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<table id="browser">
+<div class="table-responsive">
+        <p class="filter-table">Filter: <input type="search" placeholder="search this table"></p>
+        <table id="browser" class="table">
+            <thead>
+                <tr>
+                    <th scope="col" title="Id">#</th>
+                    <th scope="col">Patient</th>
+                    <th scope="col">Optometrist</th>
+                    <th scope="col">NoOfSession</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.Diagnosis)
+                {
+                    <tr><td>@item.DiagnosisID</td><td>@item.Patient.Name</td><td>@item.Optometrist</td><td>@item.NoOfSession</td><td><a href="#">Edit</a></td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+@*<table id="browser">
     <thead>
         <tr>
             <th scope="col" title="Id">#</th>
@@ -15,7 +34,7 @@
     <tbody>
         @foreach (var item in ViewBag.Diagnosis)
         {
-            <tr><td>@item.DiagnosisID</td><td>item.Patient</td><td>two</td><td>1789-1797</td></tr>
+            <tr><td>@item.DiagnosisID</td><td>@item.Patient.Name</td><td>@item.Optometrist</td><td>@item.NoOfSession</td></tr>
         }
         <tr><td>1</td><td>George Washington</td><td>two</td><td>1789-1797</td></tr>
         <tr><td>2</td><td>John Adams</td><td>one</td><td>1797-1801</td></tr>
@@ -62,4 +81,4 @@
         <tr><td>43</td><td>George Walker Bush</td><td>two</td><td>2001-2009</td></tr>
         <tr><td>44</td><td>Barack Hussein Obama</td><td>one</td><td>2009-</td></tr>
     </tbody>
-</table>
+</table>*@

@@ -39,7 +39,7 @@ namespace VisualTraining.Controllers
         {
             using (var db = new VisualTraining.Models.Database.VisualTrainingModel())
             {
-                var diagnosis = db.Diagnosis.Include(X => X.Patient).ToList();
+                List<Diagnosis> diagnosis = db.Diagnoses.Include(X => X.Patient).ToList();
                 ViewBag.Diagnosis = diagnosis;
             }
             return View();
@@ -61,10 +61,11 @@ namespace VisualTraining.Controllers
                     db.Patients.Add(patient);
                 }
 
-                Diagnosi diagnosi = new Diagnosi();
+                Diagnosis diagnosi = new Diagnosis();
                 diagnosi.NoOfSession = numberOfSession;
+                diagnosi.Optometrist = optometrist;
                 diagnosi.PatientID = patient.PatientID;
-                db.Diagnosis.Add(diagnosi);
+                db.Diagnoses.Add(diagnosi);
 
                 int result = db.SaveChanges();
                 if (result > 0)

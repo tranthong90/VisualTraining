@@ -32,7 +32,7 @@ namespace VisualTraining.Models.Database
 
         public virtual Condition Condition { get; set; }
 
-        public virtual Diagnosi Diagnosi { get; set; }
+        public virtual Diagnosis Diagnosi { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TherapyGoalLine> TherapyGoalLines { get; set; }

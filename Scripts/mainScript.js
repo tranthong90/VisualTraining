@@ -21,7 +21,7 @@ $(function () { // will trigger when the document is ready
 
     $(".next-step").click(function (e) {
         var buttonId = $(this).attr("id");
-        alert("buttonID " + buttonId);
+        //alert("buttonID " + buttonId);
         //do action before move to the next tab
         if(buttonId === "btnStep1"){
             SavePatientInfo(moveToNextTab);

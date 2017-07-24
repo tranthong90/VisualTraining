@@ -6,10 +6,11 @@ namespace VisualTraining.Models.Database
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Diagnosi
+    [Table("Diagnosis")]
+    public partial class Diagnosis
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Diagnosi()
+        public Diagnosis()
         {
             ConditionLines = new HashSet<ConditionLine>();
             Sessions = new HashSet<Session>();
@@ -23,8 +24,7 @@ namespace VisualTraining.Models.Database
 
         public int PatientID { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal Optometrist { get; set; }
+        public string Optometrist { get; set; }
 
         public int StatusID { get; set; }
 

@@ -25,6 +25,6 @@ namespace VisualTraining.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivityLine> ActivityLines { get; set; }
 
-        public virtual Diagnosi Diagnosi { get; set; }
+        public virtual Diagnosis Diagnosi { get; set; }
     }
 }

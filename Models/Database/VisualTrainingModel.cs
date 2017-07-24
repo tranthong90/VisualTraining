@@ -16,7 +16,7 @@ namespace VisualTraining.Models.Database
         public virtual DbSet<ActivityLine> ActivityLines { get; set; }
         public virtual DbSet<Condition> Conditions { get; set; }
         public virtual DbSet<ConditionLine> ConditionLines { get; set; }
-        public virtual DbSet<Diagnosi> Diagnosis { get; set; }
+        public virtual DbSet<Diagnosis> Diagnoses { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<TherapyGoalLine> TherapyGoalLines { get; set; }
@@ -59,16 +59,16 @@ namespace VisualTraining.Models.Database
                 .WithRequired(e => e.ConditionLine)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Diagnosi>()
+            modelBuilder.Entity<Diagnosis>()
                 .Property(e => e.Optometrist)
-                .HasPrecision(19, 4);
+                  .IsUnicode(false);
 
-            modelBuilder.Entity<Diagnosi>()
+            modelBuilder.Entity<Diagnosis>()
                 .HasMany(e => e.ConditionLines)
                 .WithRequired(e => e.Diagnosi)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Diagnosi>()
+            modelBuilder.Entity<Diagnosis>()
                 .HasMany(e => e.Sessions)
                 .WithRequired(e => e.Diagnosi)
                 .WillCascadeOnDelete(false);

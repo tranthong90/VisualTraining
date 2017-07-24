@@ -12,7 +12,7 @@ namespace VisualTraining.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient()
         {
-            Diagnosis = new HashSet<Diagnosi>();
+            Diagnosis = new HashSet<Diagnosis>();
         }
 
         [Key]
@@ -29,6 +29,6 @@ namespace VisualTraining.Models.Database
         public string SystemNo { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Diagnosi> Diagnosis { get; set; }
+        public virtual ICollection<Diagnosis> Diagnosis { get; set; }
     }
 }
