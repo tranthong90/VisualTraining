@@ -273,11 +273,35 @@
                             <legend>Visual Verbal Languege Integration</legend>
                             <ul>
                                 <li class="hasActivity"><a href="">RAN</a></li>
-                                <li><a id="19" href="">Decoding speed</a></li>
+                                <li class="hasActivity"><a id="19" href="">Decoding speed</a></li>
                                 <li><a id="20" href="">VDST/ Span/ VSeqM</a></li>
                                 <li><a id="21" href="">Word Jumple</a></li>
                             </ul>
 
+                        </fieldset>
+                    </div>
+
+                    <div id="line1"></div>
+                    <div id="no2">
+                        <fieldset>
+                            <legend>Auditory Processing</legend>
+                            <ul>
+                                <li><a id="24" href="">Phonological awareness RAAS</a></li>
+                                <li><a id="25" href="">Discrimination</a></li>
+                                <li><a id="26" href="">Auditory Memory</a></li>
+                                <li class="hasActivity"><a id="27" href="">Auditory Sequential Mem</a></li>
+                                <li class="hasActivity"><a id="28" href="">Blending (synthesizing words)</a></li>
+                            </ul>
+                        </fieldset>
+                    </div>
+
+                    <div id="line1"></div>
+                    <div id="no2">
+                        <fieldset>
+                            <legend>Visual Auditory Integration</legend>
+                            <ul>
+                                <li class="hasActivity"><a id="29" href="">Aural Digit Span Test</a></li>
+                            </ul>
                         </fieldset>
                     </div>
 
@@ -314,7 +338,7 @@
                 </div>
                 <ul class="list-inline pull-right">
                     <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                    <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                    <li><button type="button" id="btnStep2" name="btnStep2" data-diagnosisid="@((Model != null) ? Model.DiagnosisID.ToString(): string.Empty)" class="btn btn-primary next-step">Save and continue</button></li>
                 </ul>
             </div>
             <div class="tab-pane" role="tabpanel" id="step3">

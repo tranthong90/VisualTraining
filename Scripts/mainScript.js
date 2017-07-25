@@ -1,4 +1,5 @@
 ﻿var selectedConditions = [];
+var selectedConditionIds = [];
 $(function () { // will trigger when the document is ready
     $('.datepicker').datepicker({
         format: "dd/mm/yyyy"
@@ -22,10 +23,12 @@ $(function () { // will trigger when the document is ready
     $(".next-step").click(function (e) {
         var buttonId = $(this).attr("id");
         var diagnosisId = $(this).attr("data-diagnosisid");
-        //alert("buttonID " + buttonId);
         //do action before move to the next tab
         if(buttonId === "btnStep1"){
-            SavePatientInfo(moveToNextTab, diagnosisId);
+         //   SavePatientInfo(moveToNextTab, diagnosisId);
+            moveToNextTab();
+        } else if (buttonId === "btnStep2") {
+            SaveConditions(moveToNextTab, diagnosisId);
         }
        
 
@@ -59,18 +62,25 @@ $("#container").on("click", "a", function (event) {
     var myId = $(this).attr("id");
     //alert(myClass);
     var html = $(this).html();
-    if (myClass == undefined || myClass == null || myClass === "hasActivity" || myClass === "isNotSelected") {
+    if (myClass != undefined && myClass != null && myClass.indexOf("isSelected") !== -1) //&& myClass.indexOf("hasActivity") == -1 && myClass.indexOf("isNotSelected") == -1)
+    {
 
-        selectedConditions.push(html);
-        $("#selectedList").append('<li id="selected' + myId + '">' + html + '</li>');
-        $(this).addClass("isSelected");
-        //   alert(myClass);
-    } else {
         $(this).attr("class", "isNotSelected");
         //alert(myId);
         $('#selected' + myId + '').remove();
-        selectedConditions.eq(html).remove();
+        var index = selectedConditions.indexOf(html);
+        selectedConditions.splice(index, 1);
+        selectedConditionIds.splice(index, 1);
         //   $(this).removeClass("isSelected");
+
+
+    } else {
+
+        selectedConditions.push(html);
+        selectedConditionIds.push(myId);
+        $("#selectedList").append('<li id="selected' + myId + '">' + html + '</li>');
+        $(this).addClass("isSelected");
+        //   alert(myClass);
       
     }
 });
@@ -85,4 +95,14 @@ function SavePatientInfo(callback,diagnosisId) {
 
     $.get("http://localhost:27948/Home/SavePatientDetail", { patientName: PatientName, optometrist: Optometrist, dob: DOB, numberOfSession: NumberOfSession, diagnosisId: diagnosisId }, callback);
     
+};
+
+function SaveConditions(callback, diagnosisId) {
+    var selectedCondition = {
+        DiagnosisId: diagnosisId,
+        SelectedConditions: selectedConditionIds
+    }
+
+    $.post("http://localhost:27948/Home/SaveConditions", selectedCondition, callback);
+
 };

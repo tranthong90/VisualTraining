@@ -14,6 +14,7 @@ namespace VisualTraining.Models.Database
         {
             ActivityLines = new HashSet<ActivityLine>();
             TherapyGoalLines = new HashSet<TherapyGoalLine>();
+            Active = true;
         }
 
         [Key]
@@ -27,6 +28,8 @@ namespace VisualTraining.Models.Database
         [StringLength(20)]
         public string Level { get; set; }
 
+        public bool Active { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivityLine> ActivityLines { get; set; }
 
@@ -36,5 +39,20 @@ namespace VisualTraining.Models.Database
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TherapyGoalLine> TherapyGoalLines { get; set; }
+
+        public void DeactivateLine()
+        {
+            if(this.ActivityLines != null)
+                foreach(var aline in this.ActivityLines)
+                {
+                    aline.Active = true;
+                }
+
+            if(this.TherapyGoalLines != null)
+                foreach(var tline in TherapyGoalLines)
+                {
+                    tline.Active = true;
+                }
+        }
     }
 }

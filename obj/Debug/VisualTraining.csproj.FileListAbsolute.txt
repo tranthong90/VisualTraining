@@ -143,3 +143,4 @@ C:\Tom\VisualTraining\VisualTraining\obj\Debug\VisualTraining.csproj.GenerateRes
 C:\Tom\VisualTraining\VisualTraining\obj\Debug\VisualTraining.dll
 C:\Tom\VisualTraining\VisualTraining\obj\Debug\VisualTraining.pdb
 C:\Tom\VisualTraining\VisualTraining\obj\Debug\VisualTraining.Migrations.changeTableName.resources
+C:\Tom\VisualTraining\VisualTraining\obj\Debug\VisualTraining.Migrations.addActivevalue.resources

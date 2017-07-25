@@ -9,6 +9,11 @@ namespace VisualTraining.Models.Database
     [Table("ActivityLine")]
     public partial class ActivityLine
     {
+        public ActivityLine()
+        {
+            Active = true;
+        }
+
         [Key]
         public int ActivityLineID { get; set; }
 
@@ -19,6 +24,8 @@ namespace VisualTraining.Models.Database
         [Required]
         [StringLength(200)]
         public string Note { get; set; }
+
+        public bool Active { get; set; }
 
         public virtual ConditionLine ConditionLine { get; set; }
 

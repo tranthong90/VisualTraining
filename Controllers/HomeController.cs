@@ -5,6 +5,8 @@ using System.Web;
 using VisualTraining.Models.Database;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Net.Http;
+using VisualTraining.Models;
 
 namespace VisualTraining.Controllers
 {
@@ -61,7 +63,7 @@ namespace VisualTraining.Controllers
             return View();
         }
 
-        public ActionResult SavePatientDetail(string patientName, string optometrist, string dob, int numberOfSession,int? diagnosisId)
+        public ActionResult SavePatientDetail(string patientName, string optometrist, string dob, int numberOfSession, int? diagnosisId)
         {
             using (var db = new VisualTraining.Models.Database.VisualTrainingModel())
             {
@@ -69,7 +71,7 @@ namespace VisualTraining.Controllers
                 if (diagnosisId == null)
                 {
                     //convert the dob to datetime
-                
+
                     //check if the patient is already in the database
                     var patient = db.Patients.FirstOrDefault(x => x.DOB == dateOfBirth && x.Name.Equals(patientName, StringComparison.CurrentCultureIgnoreCase));
                     if (patient == null)
@@ -98,14 +100,29 @@ namespace VisualTraining.Controllers
                     diagnosis.NoOfSession = numberOfSession;
                     diagnosis.Optometrist = optometrist;
                     int result = db.SaveChanges();
-                  //  if (result > 0)
-                        return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                    //  if (result > 0)
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
                 }
 
 
             }
 
             return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SaveConditions(ConditionsModel selectedCondition)
+        {
+            using (var db = new VisualTraining.Models.Database.VisualTrainingModel())
+            {
+                var conditionLines = db.ConditionLines.Where(x => x.DiagnosisID == selectedCondition.DiagnosisId).ToList();
+                //foreach(var conditionId in selectedCondition.SelectedConditions)
+                //{
+                    
+                //}
+
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         //public ActionResult Get

@@ -9,10 +9,17 @@ namespace VisualTraining.Models.Database
     [Table("TherapyGoalLine")]
     public partial class TherapyGoalLine
     {
+        public TherapyGoalLine()
+        {
+            Active = true;
+        }
+
         [Key]
         public int TherapyGoalLineID { get; set; }
 
         public int ConditionLineID { get; set; }
+
+        public bool Active { get; set; }
 
         [Required]
         [StringLength(200)]
