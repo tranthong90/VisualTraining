@@ -17,7 +17,7 @@
             <tbody>
                 @foreach (var item in ViewBag.Diagnosis)
                 {
-                    <tr><td>@item.DiagnosisID</td><td>@item.Patient.Name</td><td>@item.Optometrist</td><td>@item.NoOfSession</td><td><a href="#">Edit</a></td></tr>
+                    <tr><td>@item.DiagnosisID</td><td>@item.Patient.Name</td><td>@item.Optometrist</td><td>@item.NoOfSession</td><td>@Html.ActionLink("Edit", "VisionTraining", new { diagnosisId = item.DiagnosisID })</td></tr>
                 }
             </tbody>
         </table>

@@ -21,10 +21,11 @@ $(function () { // will trigger when the document is ready
 
     $(".next-step").click(function (e) {
         var buttonId = $(this).attr("id");
+        var diagnosisId = $(this).attr("data-diagnosisid");
         //alert("buttonID " + buttonId);
         //do action before move to the next tab
         if(buttonId === "btnStep1"){
-            SavePatientInfo(moveToNextTab);
+            SavePatientInfo(moveToNextTab, diagnosisId);
         }
        
 
@@ -75,13 +76,13 @@ $("#container").on("click", "a", function (event) {
 });
 
 
-function SavePatientInfo(callback) {
+function SavePatientInfo(callback,diagnosisId) {
     //save the patient name
     var Optometrist = $("#Optometrist").val();
     var PatientName = $("#PatientName").val();
     var DOB = $("#DOB").val();
     var NumberOfSession = $("#NumberOfSession").val();
 
-    $.get("http://localhost:27948/Home/SavePatientDetail", { patientName: PatientName, optometrist: Optometrist, dob: DOB, numberOfSession: NumberOfSession }, callback);
+    $.get("http://localhost:27948/Home/SavePatientDetail", { patientName: PatientName, optometrist: Optometrist, dob: DOB, numberOfSession: NumberOfSession, diagnosisId: diagnosisId }, callback);
     
 };

@@ -30,5 +30,16 @@ namespace VisualTraining.Models.Database
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Diagnosis> Diagnosis { get; set; }
+
+        public string DOBString
+        {
+            get
+            {
+                if (DOB != null)
+                    return ((DateTime)DOB).ToString("dd/MM/yyyy");
+                else
+                    return "";
+            }
+        }
     }
 }

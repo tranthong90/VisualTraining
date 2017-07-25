@@ -1,7 +1,8 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
-
+@model VisualTraining.Models.Database.Diagnosis
 
 <h1>Vision Training</h1>
 <div class="wizard">
@@ -45,13 +46,13 @@
                     <div class="form-group col-md-6">
                         <label class="col-md-3 control-label">Patient Name</label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text" name="PatientName" id="PatientName" />
+                            <input class="form-control" type="text" name="PatientName" id="PatientName" value="@((Model != null) ? Model.Patient.Name: string.Empty)" />
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="col-md-4 control-label">DOB</label>
                         <div class="col-md-8">
-                            <input class="form-control datepicker" type="text" name="DOB" id="DOB" />
+                            <input class="form-control datepicker" type="text" name="DOB" id="DOB" value="@((Model != null) ? Model.Patient.DOBString: string.Empty)" />
                         </div>
                     </div>
                 </div>
@@ -60,22 +61,58 @@
                         <label class="col-md-3 control-label">Optometrist</label>
                         <div class="col-md-9">
                             <select class="form-control" name="Optometrist" id="Optometrist">
-                                <option value="Anne Pezzimenti">Anne</option>
-                                <option value="Orlando Pezzimenti">Orlando</option>
-                                <option value="Peter Nixon">Peter</option>
-                                <option value="Kha Diep">Kha</option>
+                                @if (Model != null && Model.Optometrist.Equals("Anne Pezzimenti"))
+                                {
+                                    <option selected value="Anne Pezzimenti">Anne</option>
+                                }
+                                else
+                                {
+                                    <option value="Anne Pezzimenti">Anne</option>
+                                }
+                                @if (Model != null && Model.Optometrist.Equals("Orlando Pezzimenti"))
+                                {
+                                    <option selected value="Orlando Pezzimenti">Orlando</option>
+                                }
+                                else
+                                {
+                                    <option value="Orlando Pezzimenti">Orlando</option>
+                                }
+
+                                @if (Model != null && Model.Optometrist.Equals("Peter Nixon"))
+                                {
+                                    <option selected value="Peter Nixon">Peter</option>
+                                }
+                                else
+                                {
+                                    <option value="Peter Nixon">Peter</option>
+                                }
+
+                                @if (Model != null && Model.Optometrist.Equals("Kha Diep"))
+                                {
+                                    <option selected value="Kha Diep">Kha</option>
+                                }
+                                else
+                                {
+                                    <option value="Kha Diep">Kha</option>
+                                }
+
+
+                                @*<option selected="@((Model != null && Model.Optometrist.Equals("Anne Pezzimenti")) ? "selected" : string.Empty)" value="Anne Pezzimenti">Anne</option>
+                                <option selected="@((Model != null && Model.Optometrist.Equals("Orlando Pezzimenti")) ? "selected" : string.Empty)" value="Orlando Pezzimenti">Orlando</option>
+                                <option selected="@((Model != null && Model.Optometrist.Equals("Peter Nixon")) ? "selected" : string.Empty)" value="Peter Nixon">Peter</option>
+                                <option selected="@((Model != null && Model.Optometrist.Equals("Kha Diep")) ? "selected" : string.Empty)" value="Kha Diep">Kha</option>*@
                             </select>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="col-md-4 control-label">Number of Session</label>
                         <div class="col-md-8">
-                            <input class="form-control " type="number" name="NumberOfSession" id="NumberOfSession" />
+                            <input class="form-control " type="number" name="NumberOfSession" id="NumberOfSession" value="@((Model != null) ? Model.NoOfSession.ToString(): string.Empty)" />
                         </div>
                     </div>
                 </div>
                 <ul class="list-inline pull-right">
-                    <li><button type="button" class="btn btn-primary next-step" id="btnStep1" name="btnStep1">Save and continue</button></li>
+                    <li><button type="button" class="btn btn-primary next-step" data-diagnosisid="@((Model != null) ? Model.DiagnosisID.ToString(): string.Empty)" id="btnStep1" name="btnStep1">Save and continue</button></li>
                 </ul>
 
             </div>

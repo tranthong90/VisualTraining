@@ -29,10 +29,26 @@ namespace VisualTraining.Controllers
             return View();
         }
 
-        public ActionResult VisionTraining()
-        {
+        //public ActionResult VisionTraining()
+        //{
 
-            return View();
+        //    return View();
+        //}
+
+        public ActionResult VisionTraining(int? diagnosisId)
+        {
+            if (diagnosisId != null)
+            {
+                using (var db = new VisualTraining.Models.Database.VisualTrainingModel())
+                {
+                    Diagnosis diagnosis = db.Diagnoses.Include(X => X.Patient).FirstOrDefault(x => x.DiagnosisID == diagnosisId);
+                    // ViewBag.Diagnosis = diagnosis;
+
+                    return View(diagnosis);
+                }
+            }
+            else
+                return View();
         }
 
         public ActionResult Browser()
@@ -45,31 +61,46 @@ namespace VisualTraining.Controllers
             return View();
         }
 
-        public ActionResult SavePatientDetail(string patientName, string optometrist, string dob, int numberOfSession)
+        public ActionResult SavePatientDetail(string patientName, string optometrist, string dob, int numberOfSession,int? diagnosisId)
         {
             using (var db = new VisualTraining.Models.Database.VisualTrainingModel())
             {
-                //convert the dob to datetime
                 DateTime dateOfBirth = DateTime.Parse(dob);
-                //check if the patient is already in the database
-                var patient = db.Patients.FirstOrDefault(x => x.DOB == dateOfBirth && x.Name.Equals(patientName, StringComparison.CurrentCultureIgnoreCase));
-                if (patient == null)
+                if (diagnosisId == null)
                 {
-                    patient = new Models.Database.Patient();
-                    patient.Name = patientName;
-                    patient.DOB = dateOfBirth;
-                    db.Patients.Add(patient);
+                    //convert the dob to datetime
+                
+                    //check if the patient is already in the database
+                    var patient = db.Patients.FirstOrDefault(x => x.DOB == dateOfBirth && x.Name.Equals(patientName, StringComparison.CurrentCultureIgnoreCase));
+                    if (patient == null)
+                    {
+                        patient = new Models.Database.Patient();
+                        patient.Name = patientName;
+                        patient.DOB = dateOfBirth;
+                        db.Patients.Add(patient);
+                    }
+
+                    Diagnosis diagnosi = new Diagnosis();
+                    diagnosi.NoOfSession = numberOfSession;
+                    diagnosi.Optometrist = optometrist;
+                    diagnosi.PatientID = patient.PatientID;
+                    db.Diagnoses.Add(diagnosi);
+
+                    int result = db.SaveChanges();
+                    if (result > 0)
+                        return Json(new { success = true }, JsonRequestBehavior.AllowGet);
                 }
-
-                Diagnosis diagnosi = new Diagnosis();
-                diagnosi.NoOfSession = numberOfSession;
-                diagnosi.Optometrist = optometrist;
-                diagnosi.PatientID = patient.PatientID;
-                db.Diagnoses.Add(diagnosi);
-
-                int result = db.SaveChanges();
-                if (result > 0)
-                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    Diagnosis diagnosis = db.Diagnoses.Include(X => X.Patient).FirstOrDefault(x => x.DiagnosisID == diagnosisId);
+                    diagnosis.Patient.Name = patientName;
+                    diagnosis.Patient.DOB = dateOfBirth;
+                    diagnosis.NoOfSession = numberOfSession;
+                    diagnosis.Optometrist = optometrist;
+                    int result = db.SaveChanges();
+                  //  if (result > 0)
+                        return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                }
 
 
             }
